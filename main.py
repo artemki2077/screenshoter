@@ -35,11 +35,11 @@ class Screenshoter(QMainWindow):
 
         # CORDS
 
-        self.c_net = [[[0, 0], [0, 0]]]
-        self.c_name = [[[0, 0], [0, 0]]]
-        self.c_full_name = [[[0, 0], [0, 0]]]
-        self.c_lost = [[[0, 0], [0, 0]]]
-        self.c_price = [[[0, 0], [0, 0]]]
+        self.c_net = [[(0, 0), (0, 0)]]
+        self.c_name = [[(0, 0), (0, 0)]]
+        self.c_full_name = [[(0, 0), (0, 0)]]
+        self.c_lost = [[(0, 0), (0, 0)]]
+        self.c_price = [[(0, 0), (0, 0)]]
 
         # ОСНОВНЫЕ ПЕРЕМЕННЫЕ
 
@@ -137,11 +137,11 @@ class Screenshoter(QMainWindow):
 
     def cords(self):
         if self.cords_var:
-            self.c_full_name[self.index][self.state] = [self.ui.x_full_name.value(), self.ui.y_full_name.value()]
-            self.c_name[self.index][self.state] = [self.ui.x_name.value(), self.ui.y_name.value()]
-            self.c_net[self.index][self.state] = [self.ui.x_net.value(), self.ui.y_net.value()]
-            self.c_lost[self.index][self.state] = [self.ui.x_lost.value(), self.ui.y_lost.value()]
-            self.c_price[self.index][self.state] = [self.ui.x_price.value(), self.ui.y_price.value()]
+            self.c_full_name[self.index][self.state] = (self.ui.x_full_name.value(), self.ui.y_full_name.value())
+            self.c_name[self.index][self.state] = (self.ui.x_name.value(), self.ui.y_name.value())
+            self.c_net[self.index][self.state] = (self.ui.x_net.value(), self.ui.y_net.value())
+            self.c_lost[self.index][self.state] = (self.ui.x_lost.value(), self.ui.y_lost.value())
+            self.c_price[self.index][self.state] = (self.ui.x_price.value(), self.ui.y_price.value())
 
         self.castom()
 
@@ -165,7 +165,10 @@ class Screenshoter(QMainWindow):
             font_time = ImageFont.truetype('font/EuclidCircularB-Medium.ttf', 23)
 
             usd_str = f'${usd:.2f}'
-            price = round(usd / price_coin, 4)
+            if price_coin != 0:
+                price = round(usd / price_coin, 4)
+            else:
+                price = 0
 
             draw.text((40, 21), tim_now, (0, 0, 0), font=font_time)
             draw.text(self.c_full_name[self.index][self.state], f'{name}', (0, 0, 0), font=font_ful_coin_name)
@@ -184,7 +187,10 @@ class Screenshoter(QMainWindow):
             font_time = ImageFont.truetype('font/EuclidCircularB-Medium.ttf', 23)
 
             usd_str = f'~ {usd:.2f} $'
-            price = round(usd / price_coin, 4)
+            if price_coin != 0:
+                price = round(usd / price_coin, 4)
+            else:
+                price = 0
             draw.text((40, 21), tim_now, (255, 255, 255), font=font_time)
             draw.text(self.c_full_name[self.index][self.state], f'{full_name}', (255, 255, 255), font=font_ful_coin_name)
             draw.text(self.c_name[self.index][self.state], f'{norm_vid(price)} {name}'.replace(".", ","), (255, 255, 255), font=font_coin)
@@ -197,7 +203,7 @@ class Screenshoter(QMainWindow):
                 img.paste(self.coin_img, (249, 198), self.coin_img)
 
         pixmap = QPixmap(QImage(ImageQt(img)))
-        self.ui.image.setPixmap(pixmap)
+        # self.ui.image.setPixmap(pixmap)
 
     def set_values(self):
         self.cords_var = False
