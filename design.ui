@@ -48,11 +48,11 @@
             <property name="currentText">
              <string/>
             </property>
-            <property name="placeholderText">
-             <string/>
-            </property>
             <property name="duplicatesEnabled">
              <bool>false</bool>
+            </property>
+            <property name="placeholderText" stdset="0">
+             <string/>
             </property>
            </widget>
           </item>
@@ -359,8 +359,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>340</width>
-             <height>247</height>
+             <width>350</width>
+             <height>329</height>
             </rect>
            </property>
           </widget>
@@ -415,8 +415,8 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>575</width>
-          <height>601</height>
+          <width>0</width>
+          <height>0</height>
          </size>
         </property>
         <property name="autoFillBackground">

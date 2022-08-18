@@ -9,10 +9,10 @@ from typing import Union
 import requests
 from io import BytesIO
 import json
-from PySide6.QtWidgets import QApplication, QMainWindow, QFormLayout, QGroupBox, \
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFormLayout, QGroupBox, \
     QLineEdit, QPushButton, QDoubleSpinBox
 from ui import Ui_Screenshoter
-from PySide6.QtGui import QPixmap, QImage
+from PyQt5.QtGui import QPixmap, QImage
 
 
 def norm_vid(e: Union[float, int]) -> str: return '{0:,}'.format(decimal.Decimal(str(e))).replace(',', " ")
@@ -202,8 +202,9 @@ class Screenshoter(QMainWindow):
             if self.coin_img:
                 img.paste(self.coin_img, (249, 198), self.coin_img)
 
-        pixmap = QPixmap(QImage(ImageQt(img)))
-        # self.ui.image.setPixmap(pixmap)
+        pixmap = QPixmap.fromImage(ImageQt(img).copy())
+        self.ui.image.setPixmap(pixmap)
+        self.ui.image.adjustSize()
 
     def set_values(self):
         self.cords_var = False
