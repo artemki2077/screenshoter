@@ -23,6 +23,11 @@
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <widget class="QLabel" name="label_2">
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Net</string>
             </property>
@@ -32,6 +37,11 @@
            <widget class="QComboBox" name="select_net">
             <property name="enabled">
              <bool>true</bool>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
             </property>
             <property name="contextMenuPolicy">
              <enum>Qt::DefaultContextMenu</enum>
@@ -48,11 +58,11 @@
             <property name="currentText">
              <string/>
             </property>
+            <property name="placeholderText">
+             <string/>
+            </property>
             <property name="duplicatesEnabled">
              <bool>false</bool>
-            </property>
-            <property name="placeholderText" stdset="0">
-             <string/>
             </property>
            </widget>
           </item>
@@ -60,6 +70,11 @@
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <item>
              <widget class="QSpinBox" name="x_net">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="maximum">
                <number>700</number>
               </property>
@@ -67,6 +82,11 @@
             </item>
             <item>
              <widget class="QSpinBox" name="y_net">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="maximum">
                <number>700</number>
               </property>
@@ -80,6 +100,11 @@
          <layout class="QHBoxLayout" name="horizontalLayout_7">
           <item>
            <widget class="QLabel" name="label_3">
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Name</string>
             </property>
@@ -93,6 +118,14 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
             <property name="placeholderText">
              <string>MVL</string>
             </property>
@@ -102,6 +135,11 @@
            <layout class="QHBoxLayout" name="horizontalLayout_8">
             <item>
              <widget class="QSpinBox" name="x_name">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="maximum">
                <number>700</number>
               </property>
@@ -109,6 +147,11 @@
             </item>
             <item>
              <widget class="QSpinBox" name="y_name">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="maximum">
                <number>700</number>
               </property>
@@ -122,6 +165,11 @@
          <layout class="QHBoxLayout" name="horizontalLayout_9">
           <item>
            <widget class="QLabel" name="label_4">
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Full name</string>
             </property>
@@ -135,6 +183,11 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
             <property name="placeholderText">
              <string>Mass Vehicle Ledger</string>
             </property>
@@ -144,6 +197,11 @@
            <layout class="QHBoxLayout" name="horizontalLayout_10">
             <item>
              <widget class="QSpinBox" name="x_full_name">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="maximum">
                <number>700</number>
               </property>
@@ -151,6 +209,11 @@
             </item>
             <item>
              <widget class="QSpinBox" name="y_full_name">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="maximum">
                <number>700</number>
               </property>
@@ -164,6 +227,11 @@
          <layout class="QHBoxLayout" name="horizontalLayout_21">
           <item>
            <widget class="QLabel" name="label_6">
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>font</string>
             </property>
@@ -173,6 +241,7 @@
            <widget class="QDoubleSpinBox" name="font_index">
             <property name="font">
              <font>
+              <pointsize>26</pointsize>
               <underline>false</underline>
               <strikeout>false</strikeout>
              </font>
@@ -191,6 +260,11 @@
          <layout class="QHBoxLayout" name="horizontalLayout_18">
           <item>
            <widget class="QLabel" name="label_7">
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>id_api</string>
             </property>
@@ -204,6 +278,11 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
             <property name="placeholderText">
              <string>mass-vehicle-ledger</string>
             </property>
@@ -211,6 +290,11 @@
           </item>
           <item>
            <widget class="QPushButton" name="get_price">
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>get</string>
             </property>
@@ -222,6 +306,11 @@
          <layout class="QHBoxLayout" name="horizontalLayout_20">
           <item>
            <widget class="QLabel" name="label_9">
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>link img</string>
             </property>
@@ -234,6 +323,11 @@
               <width>200</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
             </property>
             <property name="placeholderText">
              <string>https://assets.coingecko.com/coins/images/3447/small/ONT.png</string>
@@ -248,6 +342,11 @@
            <layout class="QHBoxLayout" name="horizontalLayout_13">
             <item>
              <widget class="QLabel" name="label">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>platform</string>
               </property>
@@ -255,6 +354,11 @@
             </item>
             <item>
              <widget class="QCheckBox" name="check_trust">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>TrustWallet</string>
               </property>
@@ -262,6 +366,11 @@
             </item>
             <item>
              <widget class="QCheckBox" name="check_meta">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>MetaMask</string>
               </property>
@@ -275,6 +384,11 @@
          <layout class="QHBoxLayout" name="horizontalLayout_11">
           <item>
            <widget class="QLabel" name="label_5">
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>lost</string>
             </property>
@@ -282,11 +396,22 @@
           </item>
           <item>
            <widget class="QDoubleSpinBox" name="input_lost">
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
+            <property name="frame">
+             <bool>false</bool>
+            </property>
             <property name="decimals">
-             <number>16</number>
+             <number>20</number>
+            </property>
+            <property name="minimum">
+             <double>-9999999999.000000000000000</double>
             </property>
             <property name="maximum">
-             <double>90000.990000000005239</double>
+             <double>9999999.000000000000000</double>
             </property>
            </widget>
           </item>
@@ -294,6 +419,11 @@
            <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
              <widget class="QSpinBox" name="x_lost">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="maximum">
                <number>700</number>
               </property>
@@ -301,6 +431,11 @@
             </item>
             <item>
              <widget class="QSpinBox" name="y_lost">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="maximum">
                <number>700</number>
               </property>
@@ -314,6 +449,11 @@
          <layout class="QHBoxLayout" name="horizontalLayout_15">
           <item>
            <widget class="QLabel" name="label_8">
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>coin_price</string>
             </property>
@@ -321,11 +461,28 @@
           </item>
           <item>
            <widget class="QDoubleSpinBox" name="input_price">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>26</pointsize>
+             </font>
+            </property>
+            <property name="frame">
+             <bool>false</bool>
+            </property>
             <property name="decimals">
-             <number>16</number>
+             <number>20</number>
+            </property>
+            <property name="minimum">
+             <double>-9999999999.000000000000000</double>
             </property>
             <property name="maximum">
-             <double>90000.990000000005239</double>
+             <double>9999999999.000000000000000</double>
             </property>
            </widget>
           </item>
@@ -333,6 +490,11 @@
            <layout class="QHBoxLayout" name="horizontalLayout_16">
             <item>
              <widget class="QSpinBox" name="x_price">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="maximum">
                <number>700</number>
               </property>
@@ -340,6 +502,11 @@
             </item>
             <item>
              <widget class="QSpinBox" name="y_price">
+              <property name="font">
+               <font>
+                <pointsize>26</pointsize>
+               </font>
+              </property>
               <property name="maximum">
                <number>700</number>
               </property>
@@ -359,8 +526,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>350</width>
-             <height>329</height>
+             <width>595</width>
+             <height>137</height>
             </rect>
            </property>
           </widget>
@@ -368,6 +535,11 @@
         </item>
         <item>
          <widget class="QPushButton" name="plus">
+          <property name="font">
+           <font>
+            <pointsize>26</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>plus</string>
           </property>
@@ -387,6 +559,11 @@
             <height>60</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>26</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>generate</string>
           </property>
@@ -400,6 +577,11 @@
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
        <widget class="QPushButton" name="btn_state">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Trust Wallet</string>
         </property>
@@ -419,6 +601,11 @@
           <height>0</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
         <property name="autoFillBackground">
          <bool>false</bool>
         </property>
@@ -431,6 +618,11 @@
        <layout class="QHBoxLayout" name="horizontalLayout_17">
         <item>
          <widget class="QPushButton" name="back">
+          <property name="font">
+           <font>
+            <pointsize>26</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>&lt;</string>
           </property>
@@ -438,6 +630,11 @@
         </item>
         <item>
          <widget class="QPushButton" name="forward">
+          <property name="font">
+           <font>
+            <pointsize>26</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>&gt;</string>
           </property>

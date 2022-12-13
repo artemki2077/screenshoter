@@ -1,8 +1,10 @@
 import sys
+import decimal
 from PIL import Image, ImageFont, ImageDraw, Image
-from PIL.ImageQt import ImageQt
+from PIL import ImageQt
 import pretty_errors
 from pycoingecko import CoinGeckoAPI
+import random
 import datetime as dt
 import decimal
 from typing import Union
@@ -13,10 +15,51 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QFormLayout, QGroupBox, \
     QLineEdit, QPushButton, QDoubleSpinBox
 from ui import Ui_Screenshoter
 from PyQt5.QtGui import QPixmap, QImage
+import os
+
+
+ctx = decimal.Context()
+
+ctx.prec = 18
+
+
+def float_to_str(f):
+    d1 = ctx.create_decimal(repr(f))
+    answ = format(d1, 'f')
+    return answ
+
+def prepare_mask(size, antialias = 2):
+    mask = Image.new('L', (size[0] * antialias, size[1] * antialias), 0)
+    ImageDraw.Draw(mask).ellipse((0, 0) + mask.size, fill=255)
+    return mask.resize(size, Image.ANTIALIAS)
+
+def crop(im, s):
+    w, h = im.size
+    k = w / s[0] - h / s[1]
+    if k > 0: im = im.crop(((w - h) / 2, 0, (w + h) / 2, h))
+    elif k < 0: im = im.crop((0, (h - w) / 2, w, (h + w) / 2))
+    return im.resize(s, Image.ANTIALIAS)
 
 
 def norm_vid(e: Union[float, int]) -> str: return '{0:,}'.format(decimal.Decimal(str(e))).replace(',', " ")
 
+def cleaning(folder):
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+def gen_datetime(min_year=1900, max_year=dt.datetime.now().year):
+    # generate a datetime in format yyyy-mm-dd hh:mm:ss.000000
+    start = dt.datetime(min_year, 1, 1, 00, 00, 00)
+    years = max_year - min_year + 1
+    end = start + dt.timedelta(days=365 * years)
+    return start + (end - start) * random.random()
 
 class Screenshoter(QMainWindow):
     def __init__(self):
@@ -30,8 +73,8 @@ class Screenshoter(QMainWindow):
 
         # CONSTS
 
-        self.ui.select_net.addItems(['Ethereum Main Metwork', 'Binance Smart Chain', 'Polygon Mainnet', 'Cronos'])
-        self.nets = {'Ethereum Main Metwork': "ERC20", 'Binance Smart Chain': 'BEP20', 'Polygon Mainnet': 'MATIC', 'Cronos': 'CRO'}
+        self.ui.select_net.addItems(['Ethereum Main Network', 'Binance Smart Chain', 'Polygon Mainnet', 'Cronos'])
+        self.nets = {'Ethereum Main Network': "ERC20", 'Binance Smart Chain': 'BEP20', 'Polygon Mainnet': 'MATIC', 'Cronos': 'CRO'}
 
         # CORDS
 
@@ -43,7 +86,7 @@ class Screenshoter(QMainWindow):
 
         # ОСНОВНЫЕ ПЕРЕМЕННЫЕ
 
-        self.net = 'Ethereum Main Metwork'
+        self.net = 'Ethereum Main Network'
         self.name = 'MVL'
         self.full_name = "Mass Vehicle Ledger"
         self.check_metamask = True
@@ -155,7 +198,7 @@ class Screenshoter(QMainWindow):
         net = self.net
         font_var = self.font_var
         lost = self.lost
-        tim_now = dt.datetime.now().strftime('%H:%M')
+        tim_now = gen_datetime().strftime('%H:%M')
 
         if self.state:
             font_coin = ImageFont.truetype('font/EuclidCircularB-Medium.ttf', int(font_var * 45))
@@ -178,7 +221,7 @@ class Screenshoter(QMainWindow):
             x = self.c_net[self.index][self.state][0] - 10
             y = 114
             r = 4
-            draw.ellipse((x - r, y - r, x + r, y + r), fill=((12, 210, 166) if 'Ethereum Main Metwork' == net else (118, 118, 118)))
+            draw.ellipse((x - r, y - r, x + r, y + r), fill=((12, 210, 166) if 'Ethereum Main Network' == net else (118, 118, 118)))
         else:
             font_coin = ImageFont.truetype("font/DIN Next W10 Medium.otf", int(font_var * 45))
             font_usd = ImageFont.truetype("font/DIN Next W10 Medium.otf", 25)
@@ -197,10 +240,14 @@ class Screenshoter(QMainWindow):
             draw.text((300 - (len(usd_str) * 8), 365), usd_str.replace(".", ","), (108, 119, 139), font=font_usd)
             draw.text((300 - (len(usd_str) * 8), 370), "~", (108, 119, 139), font=font_usd)
             draw.text(self.c_net[self.index][self.state], self.nets[net], (108, 119, 139), font=font_net)
-            draw.text(self.c_price[self.index][self.state], f"${price_coin}", (108, 119, 139), font=font_net)
-            draw.text(self.c_lost[self.index][self.state], f"-{lost}%", (143, 57, 72), font=font_net)
+            draw.text(self.c_price[self.index][self.state], f"${float_to_str(price_coin)}", (108, 119, 139), font=font_net)
+            draw.text(self.c_lost[self.index][self.state], f"{'+' if lost > 0 else ''}{lost}%", (143, 57, 72) if lost <= 0 else (113, 196, 107), font=font_net)
             if self.coin_img:
-                img.paste(self.coin_img, (249, 198), self.coin_img)
+                size = (93, 93)
+                im = self.coin_img.copy()
+                im = crop(im, size)
+                im.putalpha(prepare_mask(size, 4))
+                img.paste(im, (249, 198), im)
 
         pixmap = QPixmap.fromImage(ImageQt(img).copy())
         self.ui.image.setPixmap(pixmap)
@@ -259,10 +306,12 @@ class Screenshoter(QMainWindow):
         net = self.net
         font_var = self.font_var
         lost = self.lost
-        tim_now = dt.datetime.now().strftime('%H:%M')
+        tim_now = gen_datetime().strftime('%H:%M')
 
         if self.ui.check_meta.isChecked():
+            cleaning('out/meta_mask')
             for i_m in range(len(self.c_net)):
+                tim_now = gen_datetime().strftime('%H:%M')
                 img = self.m_img.copy()
                 draw = ImageDraw.Draw(img)
                 usd = self.usds[i_m].value()
@@ -283,11 +332,13 @@ class Screenshoter(QMainWindow):
                 x = self.c_net[i_m][1][0] - 10
                 y = 114
                 r = 4
-                draw.ellipse((x - r, y - r, x + r, y + r), fill=((12, 210, 166) if 'Ethereum Main Metwork' == net else (118, 118, 118)))
+                draw.ellipse((x - r, y - r, x + r, y + r), fill=((12, 210, 166) if 'Ethereum Main Network' == net else (118, 118, 118)))
                 img.save(f"out/meta_mask/{i_m + 1}.png")
 
         if self.ui.check_trust.isChecked():
+            cleaning('out/trust_wallet')
             for i_t in range(len(self.c_net)):
+                tim_now = gen_datetime().strftime('%H:%M')
                 img = self.t_img.copy()
                 draw = ImageDraw.Draw(img)
                 usd = self.usds[i_t].value()
@@ -305,10 +356,14 @@ class Screenshoter(QMainWindow):
                 draw.text((300 - (len(usd_str) * 8), 365), usd_str.replace(".", ","), (108, 119, 139), font=font_usd)
                 draw.text((300 - (len(usd_str) * 8), 370), "~", (108, 119, 139), font=font_usd)
                 draw.text(self.c_net[i_t][0], self.nets[net], (108, 119, 139), font=font_net)
-                draw.text(self.c_price[i_t][0], f"${price_coin}", (108, 119, 139), font=font_net)
-                draw.text(self.c_lost[i_t][0], f"-{lost}%", (143, 57, 72), font=font_net)
+                draw.text(self.c_price[i_t][0], f"${float_to_str(price_coin)}", (108, 119, 139), font=font_net)
+                draw.text(self.c_lost[i_t][0], f"{'+' if lost > 0 else ''}{lost}%", (143, 57, 72) if lost <= 0 else (113, 196, 107), font=font_net)
                 if self.coin_img:
-                    img.paste(self.coin_img, (249, 198), self.coin_img)
+                    size = (93, 93)
+                    im = self.coin_img.copy()
+                    im = crop(im, size)
+                    im.putalpha(prepare_mask(size, 4))
+                    img.paste(im, (249, 198), im)
                 img.save(f"out/trust_wallet/{i_t + 1}.png")
 
     def update(self):
